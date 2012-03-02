@@ -7,6 +7,8 @@ package worldkit.core
 		public function DrawingArea()
 		{
 			super();
+			
 		}
+		
 	}
 }
