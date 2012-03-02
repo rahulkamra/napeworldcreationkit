@@ -10,6 +10,6 @@ package worldkit.data
 		{
 		}
 		
-		public var shapes:Vector.<BodyDO> = new shapes:Vector.<BodyDO>();
+		public var bodies:Vector.<BodyDO> = new Vector.<BodyDO>();
 	}
 }

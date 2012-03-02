@@ -31,22 +31,9 @@ package worldkit.core
 		}
 		
 		public function initNape(stage:Stage,sprite:Sprite):void{
-			this.stage = stage;
-			this.mainSprite = sprite;
-			space = new Space(new Vec2(0,600));
-			debug = new ShapeDebug(600,600);
-			sprite.addChild(debug.display);
-			stage.addEventListener(Event.ENTER_FRAME,enterFrame);;
 			
 		}
 		
-		protected function enterFrame(event:Event):void
-		{
-			debug.clear();
-			space.step(1/stage.frameRate,10,10);
-			debug.draw(space);
-			debug.flush();
-		}
 		
 		
 		

@@ -13,6 +13,8 @@
 			import worldkit.core.DrawingController;
 			import worldkit.core.NapeController;
 			import worldkit.data.BodyDO;
+			import worldkit.data.PolygonDO;
+			import worldkit.data.ShapeDO;
 			
 			public var mainArea:UIComponent = new UIComponent;
 
@@ -22,23 +24,21 @@
 			protected function brcDrawingArea_creationCompleteHandler(event:Event):void
 			{
 				// TODO Auto-generated method stub
-				brcDrawingArea.addElement(mainArea);
-				mainDebug = new ShapeDebug(10,10,0xff00ff);
-				
 				drawingArea = new DrawingArea;
 				mainArea.addChild(drawingArea);
-				drawingArea.addChild(mainDebug.display);
-				
-				DrawingController.Instance.init(drawingArea);
-				
-				NapeController.Instance.initNape(brcDrawingArea.stage,drawingArea);
+				brcDrawingArea.addElement(mainArea);
 			}
 			
 			protected function createRectangle(event:MouseEvent):void
 			{
 				// TODO Auto-generated method stub
+				var bodyDO:BodyDO = new BodyDO(100,100,BodyDO.DYNAMIC);
 				
-				DrawingController.Instance.addRectangularBody(new BodyDO(50,50,100,100))
+				var shapes:Vector.<ShapeDO> = new Vector.<ShapeDO>();
+				shapes.push(new PolygonDO(50,50));
+				bodyDO.shapes = shapes;
+				
+				DrawingController.Instance.addPlygonBody(bodyDO)
 				//mainDebug
 			}
 			
@@ -49,6 +49,7 @@
 	</fx:Declarations>
 	<s:BorderContainer left="5" top="5" bottom="5" width="40" >
 		<s:Button x="2" y="4" width="34" label="R" click="createRectangle(event)"/>
+		<s:Button x="2" y="334" width="36" label="P" click="{DrawingArea.run = !DrawingArea.run}"/>
 	</s:BorderContainer>
 	<s:BorderContainer left="50" right="5" top="5" bottom="5" id="brcDrawingArea" addedToStage="brcDrawingArea_creationCompleteHandler(event)">
 	</s:BorderContainer>
