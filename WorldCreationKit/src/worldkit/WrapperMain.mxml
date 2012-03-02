@@ -7,11 +7,39 @@
 			import mx.core.UIComponent;
 			import mx.events.FlexEvent;
 			
+			import nape.util.ShapeDebug;
+			
+			import worldkit.core.DrawingArea;
+			import worldkit.core.DrawingController;
+			import worldkit.core.NapeController;
+			import worldkit.data.BodyDO;
+			
 			public var mainArea:UIComponent = new UIComponent;
-			protected function brcDrawingArea_creationCompleteHandler(event:FlexEvent):void
+
+			private var drawingArea:DrawingArea;
+			public static  var mainDebug:ShapeDebug = new ShapeDebug(100,100);
+			
+			protected function brcDrawingArea_creationCompleteHandler(event:Event):void
 			{
 				// TODO Auto-generated method stub
 				brcDrawingArea.addElement(mainArea);
+				mainDebug = new ShapeDebug(10,10,0xff00ff);
+				
+				drawingArea = new DrawingArea;
+				mainArea.addChild(drawingArea);
+				drawingArea.addChild(mainDebug.display);
+				
+				DrawingController.Instance.init(drawingArea);
+				
+				NapeController.Instance.initNape(brcDrawingArea.stage,drawingArea);
+			}
+			
+			protected function createRectangle(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				
+				DrawingController.Instance.addRectangularBody(new BodyDO(50,50,100,100))
+				//mainDebug
 			}
 			
 		]]>
@@ -20,8 +48,8 @@
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
 	<s:BorderContainer left="5" top="5" bottom="5" width="40" >
-		<s:Button x="2" y="4" width="34" label="R"/>
+		<s:Button x="2" y="4" width="34" label="R" click="createRectangle(event)"/>
 	</s:BorderContainer>
-	<s:BorderContainer left="50" right="5" top="5" bottom="5" id="brcDrawingArea" creationComplete="brcDrawingArea_creationCompleteHandler(event)">
+	<s:BorderContainer left="50" right="5" top="5" bottom="5" id="brcDrawingArea" addedToStage="brcDrawingArea_creationCompleteHandler(event)">
 	</s:BorderContainer>
 </s:Group>

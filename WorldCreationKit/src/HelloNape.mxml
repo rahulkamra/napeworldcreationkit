@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
 			   xmlns:s="library://ns.adobe.com/flex/spark" 
-			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600" applicationComplete="application1_creationCompleteHandler(event)">
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600" applicationComplete="application1_creationCompleteHandler(event)" xmlns:worldkit="worldkit.*">
 	<fx:Script>
 		<![CDATA[
 			import mx.core.UIComponent;
@@ -10,12 +10,11 @@
 			protected function application1_creationCompleteHandler(event:FlexEvent):void
 			{
 				// TODO Auto-generated method stub
-				var main:Main = new Main();
+				 var main:Main = new Main();
 				//main.setDimention(600,600);
 				main.x = 100;
 				main.y = 100;
-				stage.addChild(main);
-				
+			//	stage.addChild(main); 
 				
 			}
 			
@@ -24,4 +23,6 @@
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
+	
+	<worldkit:WrapperMain visible="true"/>
 </s:Application>
