@@ -14,7 +14,7 @@
 				//main.setDimention(600,600);
 				main.x = 100;
 				main.y = 100;
-			//	stage.addChild(main); 
+				//stage.addChild(main); 
 				
 			}
 			

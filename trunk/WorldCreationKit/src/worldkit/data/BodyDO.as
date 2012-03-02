@@ -4,16 +4,15 @@ package worldkit.data
 
 	public class BodyDO
 	{
-		public function BodyDO(x:int,y:int,width:int,height:int,type:String = null)
+		public function BodyDO(x:int,y:int,type:String = null)
 		{
 			this.x = x;
 			this.y = y;
-			this.width = width;
-			this.height = height;
+			
 			if(!type)
 				this.type = STATIC;
 			else
-				this.type = DYNAMIC; 
+				this.type = type; 
 			
 		}
 		
@@ -23,8 +22,6 @@ package worldkit.data
 		
 		public var x:Number = 0;
 		public var y:Number= 0;
-		public var width:Number= 0;
-		public var height:Number= 0;
 		public var type:String = STATIC;
 		public var shapes:Vector.<ShapeDO> = new Vector.<ShapeDO>();
 	}

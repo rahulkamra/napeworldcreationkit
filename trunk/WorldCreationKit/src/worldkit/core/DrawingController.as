@@ -11,6 +11,8 @@ package worldkit.core
 	import nape.shape.Polygon;
 	
 	import worldkit.data.BodyDO;
+	import worldkit.data.PolygonDO;
+	import worldkit.data.ShapeDO;
 	import worldkit.gfx.GfxPolygon;
 
 	public class DrawingController
@@ -28,16 +30,14 @@ package worldkit.core
 			return model;
 		}
 		
-		private var drawingArea:Sprite;
-		public function init(area:Sprite):void{
+		private var drawingArea:DrawingArea;
+		public function init(area:DrawingArea):void{
 			this.drawingArea = area;
 		}
 		
-		public function addRectangularBody(data:BodyDO):void{
-			var body:Body = BodyFactory.createRectangleBody(data); 
-			body.position.x = data.x;
-			body.position.y = data.y;
-			body.space = NapeController.Instance.space;
+		public function addPlygonBody(data:BodyDO):void{
+			var body:Body = BodyFactory.createPolygonBody(data); 
+			drawingArea.pushBody(body,data);
 		}
 	}
 }
