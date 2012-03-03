@@ -24,8 +24,7 @@
 			protected function brcDrawingArea_creationCompleteHandler(event:Event):void
 			{
 				// TODO Auto-generated method stub
-				drawingArea = new DrawingArea;
-				mainArea.addChild(drawingArea);
+				mainArea.addChild(DrawingArea.Instance);
 				brcDrawingArea.addElement(mainArea);
 			}
 			
@@ -49,7 +48,7 @@
 	</fx:Declarations>
 	<s:BorderContainer left="5" top="5" bottom="5" width="40" >
 		<s:Button x="2" y="4" width="34" label="R" click="createRectangle(event)"/>
-		<s:Button x="2" y="334" width="36" label="P" click="{DrawingArea.run = !DrawingArea.run}"/>
+		<s:Button x="2" y="334" width="36" label="P" click="{DrawingArea.Instance.run = !DrawingArea.Instance.run}"/>
 	</s:BorderContainer>
 	<s:BorderContainer left="50" right="5" top="5" bottom="5" id="brcDrawingArea" addedToStage="brcDrawingArea_creationCompleteHandler(event)">
 	</s:BorderContainer>

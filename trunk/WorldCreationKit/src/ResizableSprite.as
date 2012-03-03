@@ -13,7 +13,7 @@ package
 		
 		public function setDimention(width:Number,height:Number):void{
 			this.graphics.clear();
-			this.graphics.beginFill( 0xffffff, 1.0 );
+			this.graphics.beginFill( 0xffff00, 1.0 );
 			this.graphics.drawRect(0,0,width,height);	
 			this.graphics.endFill();
 		}

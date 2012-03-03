@@ -84,16 +84,15 @@ package
 			//body.position.setxy(stage.stageWidth/2-100,stage.stageHeight/2);
 			body1.space = space;
 			//debug.
-			addEventListener(MouseEvent.CLICK,function click():void{
-				trace("Hello!!");
+			stage.addEventListener(MouseEvent.CLICK,function click():void{
 				var mp:Vec2 = new Vec2(mouseX,mouseY);
 				var list:BodyList = space.bodiesUnderPoint(mp)
+				trace("Hello!!",list);
 				
 				for(var b:Object in space.bodiesUnderPoint(mp)) {
 					trace(b);
 					
 				}
-				
 			});
 			
 			addEventListener(Event.ENTER_FRAME,enterFrame);
