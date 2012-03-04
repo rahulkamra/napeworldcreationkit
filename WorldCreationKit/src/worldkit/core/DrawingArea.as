@@ -97,6 +97,7 @@ package worldkit.core
 			bodyKeyDict[body] = bodyDO;
 			dataKeyDict[bodyDO] = body;
 			body.space = this.space;
+			trace(body.position.x , bodyDO.x);
 		}
 		
 		public function makeBodyDirty(body:Body):void{
@@ -108,6 +109,9 @@ package worldkit.core
 			//means sync body with the Data
 			syncBodyWithData(body,false);
 			//dirtyBodies.
+		}
+		public function makeEverythingClean():void{
+			dirtyBodies = new Array();
 		}
 		
 		

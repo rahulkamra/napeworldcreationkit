@@ -34,21 +34,38 @@ package worldkit.core
 		
 		private var isMouseDown:Boolean = false;
 		
+		private var previousMouseX:int = -1;
+		private var previousMouseY:int = -1;
+		
 		protected function onMouseMove(event:MouseEvent):void
 		{
 			// TODO Auto-generated method stub
 			if(!focusBody)
 				return;	
 			
-			trace("Moving");
-			var bodyDO:BodyDO = DrawingArea.Instance.bodyKeyDict[focusBody];
-			bodyDO.x = DrawingArea.Instance.mouseX;
-			bodyDO.y = DrawingArea.Instance.mouseY;
+			if(isMouseDown){
+				if(previousMouseX == -1 || previousMouseY == -1){
+					previousMouseX = DrawingArea.Instance.mouseX;
+					previousMouseY = DrawingArea.Instance.mouseY;
+				}
+				var diffX:int = DrawingArea.Instance.mouseX - previousMouseX;
+				var diffY:int = DrawingArea.Instance.mouseY - previousMouseY;
+				trace(diffX,diffY)
+					
+				var bodyDO:BodyDO = DrawingArea.Instance.bodyKeyDict[focusBody];
+				bodyDO.x = bodyDO.x + diffX;
+				bodyDO.y = bodyDO.y + diffY;
+				previousMouseX = DrawingArea.Instance.mouseX;
+				previousMouseY = DrawingArea.Instance.mouseY;
+				
+			}
 		}
 		
 		protected function onMouseUp(event:MouseEvent):void
 		{
 			// TODO Auto-generated method stub
+			previousMouseX = -1
+			previousMouseY = -1
 			isMouseDown = false;
 		}
 		
@@ -71,8 +88,6 @@ package worldkit.core
 				addFocusBody(body);
 			}
 			
-			trace(focusBody);
-				
 		}
 		
 		
@@ -87,10 +102,14 @@ package worldkit.core
 			}
 			DrawingArea.Instance.makeBodyDirty(body);
 			focusBody = body;
+			focusBody.graphicUpdate = HighlightController.Instance.createHighlighter;
 		}
 		
 		public function removeFocusBody():void{
-			focusBody = null;
+			if(focusBody){
+				focusBody.graphicUpdate = null;
+				focusBody = null;
+			}
 		}
 		
 		
