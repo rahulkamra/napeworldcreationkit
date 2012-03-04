@@ -16,8 +16,6 @@ package worldkit.core
 		
 		public static function createPolygonBody(data:BodyDO):Body{
 			var body:Body = new Body(getBodyType(data.type));
-			body.position.setxy(data.x,data.y);
-			
 			for(var count:int = 0;count < data.shapes.length ; count++){
 				var eachObj:ShapeDO = data.shapes[count];
 				if(eachObj is PolygonDO){
@@ -25,6 +23,7 @@ package worldkit.core
 				}
 			}
 			body.align();
+			body.position.setxy(data.x,data.y);
 			return body;
 		}
 		
