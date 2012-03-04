@@ -29,7 +29,6 @@ package worldkit.core
 		
 		private static function addPolygonshape(polygonDO:PolygonDO,body:Body):void{
 			var polygon:Polygon =  new Polygon(Polygon.rect(0,0,polygonDO.width,polygonDO.height));;
-			
 			body.shapes.add(polygon);
 		}
 		public static function getBodyType(bodyType:String):BodyType{
