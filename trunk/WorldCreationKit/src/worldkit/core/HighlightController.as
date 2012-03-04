@@ -32,10 +32,8 @@ package worldkit.core
 			if(circlesArray.length == 0){
 				initSprite();
 			}
-			
 			(circlesArray[0] as Sprite).x = body.position.x - body.bounds.width/2;
 			(circlesArray[0] as Sprite).y = body.position.y - body.bounds.height/2;
-			//trace((circlesArray[0] as Sprite).x);
 		}
 		
 		public function removeHighlighter():void{

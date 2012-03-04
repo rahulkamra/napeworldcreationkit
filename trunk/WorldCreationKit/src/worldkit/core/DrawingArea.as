@@ -13,6 +13,7 @@ package worldkit.core
 	import nape.space.Space;
 	import nape.util.ShapeDebug;
 	
+	import worldkit.core.event.WorldKitEvent;
 	import worldkit.data.BodyDO;
 	
 	public class DrawingArea extends Sprite
@@ -46,6 +47,7 @@ package worldkit.core
 			return model;
 		}
 		private function addedToStage(event:Event):void{
+			
 			DrawingController.Instance.init(this);
 			
 			mainDebug = new ShapeDebug(0,0,0xff00ff);
@@ -54,7 +56,8 @@ package worldkit.core
 			space = new Space(new Vec2(0,600));
 			
 			addEventListener(Event.ENTER_FRAME,enterFrame);
-			MouseInteractionController.Instance;
+			MouseInteractionController.Instance.init();
+			dispatchEvent(new WorldKitEvent(WorldKitEvent.INIT_COMPLETE));
 		}
 		
 		protected function enterFrame(event:Event):void
@@ -81,7 +84,6 @@ package worldkit.core
 		/* Shapes Sync will be added later on */
 		private function syncBodyWithData(body:Body,changeShapes:Boolean):void{
 			var data:BodyDO = bodyKeyDict[body] as BodyDO;
-			trace(data.x,body.position.x)
 			body.position.x = data.x;
 			body.position.y = data.y;
 			

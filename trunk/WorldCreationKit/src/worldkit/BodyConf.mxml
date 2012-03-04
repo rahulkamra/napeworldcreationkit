@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="400" height="40" creationComplete="group1_creationCompleteHandler(event)" visible="true">
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import mx.events.FlexEvent;
+			
+			import spark.events.IndexChangeEvent;
+			
+			import worldkit.core.DrawingArea;
+			import worldkit.core.MouseInteractionController;
+			import worldkit.core.event.InteractiveEvent;
+			import worldkit.core.event.WorldKitEvent;
+			import worldkit.data.BodyDO;
+			[Bindable]
+			private var _data:BodyDO;
+			
+			public function set data(value:BodyDO):void{
+				this._data = value;
+			}
+			
+			protected function combobox1_changeHandler(event:IndexChangeEvent):void
+			{
+				// TODO Auto-generated method stub
+				if(_data)
+					_data.type = cmbType.selectedItem as String
+			}
+			
+			protected function group1_creationCompleteHandler(event:FlexEvent):void
+			{
+				// TODO Auto-generated method stub
+				DrawingArea.Instance.addEventListener(WorldKitEvent.INIT_COMPLETE,initcomplete);
+			}
+			
+			protected function highlightEvent(event:InteractiveEvent):void
+			{
+				// TODO Auto-generated method stub
+				if(event.body){
+					_data = DrawingArea.Instance.bodyKeyDict[event.body] as BodyDO;
+				}else{
+					_data = null;
+				}
+				
+			}
+			
+			protected function initcomplete(event:Event):void
+			{
+				// TODO Auto-generated method stub
+				MouseInteractionController.Instance.addEventListener(InteractiveEvent.HIGHLIGHT_EVENT,highlightEvent);
+				
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:ComboBox x="10" y="10" dataProvider="{new ArrayCollection([BodyDO.DYNAMIC,BodyDO.KINEMATIC,BodyDO.STATIC])}" selectedItem="{_data.type}" change="combobox1_changeHandler(event)" id="cmbType"/>
+</s:Group>
