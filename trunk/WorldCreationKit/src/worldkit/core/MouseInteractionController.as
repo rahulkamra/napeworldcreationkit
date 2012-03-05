@@ -82,7 +82,6 @@ package worldkit.core
 		protected function onClick(event:MouseEvent):void
 		{
 			// TODO Auto-generated method stub
-			trace("Click");
 			var mp:Vec2 = new Vec2(DrawingArea.Instance.mouseX,DrawingArea.Instance.mouseY);
 			var list:BodyList = DrawingArea.Instance.space.bodiesUnderPoint(mp)
 			if(list.length == 0){

@@ -2,16 +2,19 @@ package worldkit.data
 {
 	public class PolygonDO extends ShapeDO
 	{
-		public function PolygonDO(width:Number,height:Number)
+		public function PolygonDO(points:Array)
 		{
 			super();
-			this.width = width;
-			this.height = height;
+			/*this.points = points;
+			this.height = height;*/
 			
 		}
 		
-		public var width:Number= 0;
-		public var height:Number= 0;
+		public var points:Array;
+		
+		public function get numberOfSides():int{
+			throw new Error("Must be overridden");
+		}
 		
 		
 	}

@@ -1,45 +1,38 @@
 package worldkit.gfx
 {
 	import flash.display.Sprite;
+	import flash.events.Event;
+	
+	import worldkit.data.PolygonDO;
 	
 	public class GfxPolygon extends Sprite
 	{
-		public function GfxPolygon(points:Array)
+		
+		private var polygonDO:PolygonDO;
+		public function GfxPolygon()
 		{
 			super();
-			this.graphics.lineStyle(3,0x000000,1);
-			var commands:Array = convertIntoDrawCommands(points);
-			this.graphics.beginFill(0xff2200);
-			this.graphics.drawPath(commands[0],commands[1]);
-			this.graphics.endFill();
+			polygonDO = new PolygonDO();
+			addEventListener(Event.ENTER_FRAME,enterFrame);
 		}
 		
-		private function convertIntoDrawCommands(points:Array):Array{
-			var drawCoords:Vector.<Number> = new Vector.<Number>();
-			var drawCommands:Vector.<int> = new Vector.<int>();
-			/*drawCoords.push(points[0].x,points[0].y);
-			drawCommands.push(1);*/
-			for(var count:int = 0 ; count < points.length ; count++){
-				if(count+1 == points.length){
-					drawCoords.push(points[0].x,points[0].y);
-					drawCommands.push(2);
-				}else{
-					drawCoords.push(points[count+1].x,points[count+1].y);
-					drawCommands.push(2);
-				}
-			}
-			
-			return [drawCommands,drawCoords];
+		private function enterFrame(event:Event):void{
+			syncData();	
+		}
+		
+		protected function syncData():void{
+			//data.points = 	
 		}
 		
 		
-		public function drawPolygon():void{
-			
+		public function createFromPoints(points:Array):void{
+			GraphicFactory.drawPolygon(points,this);	
 		}
 		
-		public static function  drawPolygon():void{
-			
+		public function get data():PolygonDO{
+			return this.polygonDO;	
 		}
+		
 		
 			
 	}
