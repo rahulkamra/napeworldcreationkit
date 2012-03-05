@@ -18,6 +18,7 @@
 			import worldkit.data.BodyDO;
 			import worldkit.data.PolygonDO;
 			import worldkit.data.ShapeDO;
+			import worldkit.gfx.GraphicFactory;
 			
 			public var mainArea:UIComponent = new UIComponent;
 
@@ -34,13 +35,16 @@
 			protected function createRectangle(event:MouseEvent):void
 			{
 				// TODO Auto-generated method stub
-				var bodyDO:BodyDO = new BodyDO(100,100,BodyDO.DYNAMIC);
+				var sp:Sprite  = GraphicFactory.drawRectangle(0,0,100,100)[0] as Sprite;
+				DrawingArea.Instance.addChild(sp);
+				
+				/* var bodyDO:BodyDO = new BodyDO(100,100,BodyDO.DYNAMIC);
 				
 				var shapes:Vector.<ShapeDO> = new Vector.<ShapeDO>();
 				shapes.push(new PolygonDO(50,50));
 				bodyDO.shapes = shapes;
 				
-				DrawingController.Instance.addPlygonBody(bodyDO);
+				DrawingController.Instance.addPlygonBody(bodyDO); */
 				//mainDebug
 				
 			}

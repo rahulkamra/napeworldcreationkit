@@ -50,8 +50,8 @@ package
 			var bodyDO:BodyDO = new BodyDO(500,0,BodyDO.DYNAMIC);
 			
 			var shapes:Vector.<ShapeDO> = new Vector.<ShapeDO>();
-			shapes.push(new PolygonDO(50,50));
-			bodyDO.shapes = shapes;
+			//shapes.push(new PolygonDO(50,50));
+			//bodyDO.shapes = shapes;
 			
 			var body:Body = BodyFactory.createPolygonBody(bodyDO)
 			body.space = space;
