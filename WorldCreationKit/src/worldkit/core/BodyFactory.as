@@ -25,14 +25,11 @@ package worldkit.core
 			}
 			body.position.setxy(data.x,data.y);
 			body.align();
-			trace(body.position.x)
-			trace(body.position.y)
 			return body;
 		}
 		
 		private static function addPolygonshape(polygonDO:PolygonDO,body:Body):void{
 			var polygon:Polygon =  new Polygon(polygonDO.points);
-			trace(polygonDO.points);
 			body.shapes.add(polygon);
 		}
 		
