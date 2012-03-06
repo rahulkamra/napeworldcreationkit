@@ -15,16 +15,33 @@ package worldkit.gfx
 		}
 		
 		public static function createGraphicFromBody(bodyDO:BodyDO):GfxElement{
-			var sprite:GfxElement = new GfxElement(bodyDO);
+			var sprite:GfxElement
+			if(bodyDO.shapes.length == 1){
+				//means special figueres
+				var shape:ShapeDO = bodyDO.shapes[0];
+				if(shape is RectangleDO){
+					sprite = new GfxRectangle(bodyDO);
+					addRectangle(sprite,shape as RectangleDO);
+				}
+			}else{
+				sprite = new GfxElement(bodyDO)
+				for(var count:int = 0 ; count < bodyDO.shapes.length;count++){
+					var eachShape:ShapeDO = bodyDO.shapes[count];
+					if(eachShape is RectangleDO){
+						addRectangle(sprite,eachShape as RectangleDO);
+					}
+				} 
+			}
+			
+			if(sprite == null){
+				//means sprite not defined
+				throw new Error("New Entity");
+			}
+			
 			sprite.x = bodyDO.x;
 			sprite.y = bodyDO.y;
 			
-			for(var count:int = 0 ; count < bodyDO.shapes.length;count++){
-				var eachShape:ShapeDO = bodyDO.shapes[count];
-				if(eachShape is RectangleDO){
-					addRectangle(sprite,eachShape as RectangleDO);
-				}
-			} 
+			
 			return sprite;
 		}
 		
@@ -33,7 +50,7 @@ package worldkit.gfx
 		}
 		
 		private static function addRectangle(gfxElement:GfxElement,shape:RectangleDO):void{
-			GraphicFactory.drawPolygon(shape.points,gfxElement);
+			GraphicFactory.drawPolygon(shape.points,gfxElement.mainContainer);
 		}
 		
 	}

@@ -12,22 +12,16 @@ package worldkit.gfx
 		{
 		}
 		
-		/*public static function drawRectangle(x:int,y:int,width:Number,height:Number,sprite:GfxElement = null):Array{
-			if(!sprite)sprite = new GfxRectangle();
-			sprite.graphics.lineStyle(3,0x000000,1);
-			
-			var points:Array = getRectanglePoints(x,y,width,height);
-			var commands:Array = convertIntoDrawCommands(points);
-			
-			sprite.graphics.beginFill(0xff2200);
-			sprite.graphics.drawPath(commands[0],commands[1]);
-			sprite.graphics.endFill();
+		public static function drawRectangle(x:int,y:int,width:Number,height:Number,sprite:Sprite = null):Array{
+			if(!sprite)sprite = new Sprite();
+			var points:Array = PhysicsFactory.getRectanglePoints(x,y,width,height);
+			drawPolygon(points,sprite);
 			return [sprite,points];
-		}*/
+		}
 		
 		public static function drawPolygon(points:Array,sprite:Sprite = null):Sprite{
 			if(!sprite)sprite = new Sprite();
-			sprite.graphics.lineStyle(1,0x000000,1);
+			sprite.graphics.lineStyle(0,0x000000,1);
 			var commands:Array = convertIntoDrawCommands(points);
 			
 			sprite.graphics.beginFill(0xff2200,0.5);
