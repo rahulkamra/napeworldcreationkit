@@ -63,7 +63,6 @@ package worldkit.core
 		public function mouseChangeHandler(event:MousePositionChangeEvent):void{
 			if(!focusElement)
 				return;	
-			trace(event.deltaX)
 			
 			if(mouseDownTarget is CircleDot){
 				handleMove(mouseDownTarget as CircleDot,event.deltaX,event.deltaY);
@@ -109,6 +108,10 @@ package worldkit.core
 					break;
 				}
 				case CircleDot.BOTTOM_LEFT : {
+					if(focusElement.mainContainer.width != 0 ){
+						focusElement.x =focusElement.x +deltaX; 
+					}
+					focusElement.changeSize((focusElement.mainContainer.width -deltaX),(focusElement.mainContainer.height +deltaY));
 					break;
 				}
 				case CircleDot.BOTTOM_RIGHT : {
