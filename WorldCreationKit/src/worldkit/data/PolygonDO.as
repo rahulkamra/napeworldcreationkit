@@ -5,9 +5,7 @@ package worldkit.data
 		public function PolygonDO(points:Array)
 		{
 			super();
-			/*this.points = points;
-			this.height = height;*/
-			
+			this.points =points;
 		}
 		
 		public var points:Array;

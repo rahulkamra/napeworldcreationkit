@@ -16,21 +16,26 @@ package worldkit.core
 		
 		public static function createPolygonBody(data:BodyDO):Body{
 			var body:Body = new Body(getBodyType(data.type));
+			
 			for(var count:int = 0;count < data.shapes.length ; count++){
 				var eachObj:ShapeDO = data.shapes[count];
 				if(eachObj is PolygonDO){
 					addPolygonshape(eachObj as PolygonDO,body);		
 				}
 			}
-			body.align();
 			body.position.setxy(data.x,data.y);
+			body.align();
+			trace(body.position.x)
+			trace(body.position.y)
 			return body;
 		}
 		
 		private static function addPolygonshape(polygonDO:PolygonDO,body:Body):void{
-		//	var polygon:Polygon =  new Polygon(Polygon.rect(0,0,polygonDO.width,polygonDO.height));;
-			//body.shapes.add(polygon);
+			var polygon:Polygon =  new Polygon(polygonDO.points);
+			trace(polygonDO.points);
+			body.shapes.add(polygon);
 		}
+		
 		public static function getBodyType(bodyType:String):BodyType{
 			switch(bodyType)
 			{

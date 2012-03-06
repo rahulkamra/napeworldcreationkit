@@ -12,8 +12,8 @@ package worldkit.gfx
 		{
 		}
 		
-		public static function drawRectangle(x:int,y:int,width:Number,height:Number,sprite:Sprite = null):Array{
-			if(!sprite)sprite = new Sprite();
+		/*public static function drawRectangle(x:int,y:int,width:Number,height:Number,sprite:GfxElement = null):Array{
+			if(!sprite)sprite = new GfxRectangle();
 			sprite.graphics.lineStyle(3,0x000000,1);
 			
 			var points:Array = getRectanglePoints(x,y,width,height);
@@ -23,15 +23,14 @@ package worldkit.gfx
 			sprite.graphics.drawPath(commands[0],commands[1]);
 			sprite.graphics.endFill();
 			return [sprite,points];
-		}
+		}*/
 		
 		public static function drawPolygon(points:Array,sprite:Sprite = null):Sprite{
 			if(!sprite)sprite = new Sprite();
-			sprite.graphics.lineStyle(3,0x000000,1);
-			
+			sprite.graphics.lineStyle(1,0x000000,1);
 			var commands:Array = convertIntoDrawCommands(points);
 			
-			sprite.graphics.beginFill(0xff2200);
+			sprite.graphics.beginFill(0xff2200,0.5);
 			sprite.graphics.drawPath(commands[0],commands[1]);
 			sprite.graphics.endFill();
 			return sprite;
@@ -39,14 +38,14 @@ package worldkit.gfx
 		
 		
 		
-		private static function getRectanglePoints(x:int,y:int,width:Number,height:Number):Array{
-			return Polygon.rect(x,y,width,height)
-		}
 		
 		
 		private static function convertIntoDrawCommands(points:Array):Array{
 			var drawCoords:Vector.<Number> = new Vector.<Number>();
 			var drawCommands:Vector.<int> = new Vector.<int>();
+			
+			drawCoords.push(points[0].x,points[0].y);
+			drawCommands.push(1);
 			for(var count:int = 0 ; count < points.length ; count++){
 				if(count+1 == points.length){
 					drawCoords.push(points[0].x,points[0].y);
