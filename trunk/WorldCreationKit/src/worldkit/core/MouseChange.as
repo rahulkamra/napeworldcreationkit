@@ -13,15 +13,22 @@ package worldkit.core
 		private var previousMouseY:int = -1;
 		private var _isRunning:Boolean = false 
 		
+		private var mode:String;
+		public static const RELATIVE:String ="Relative"; 
+		public static const LIVE:String ="Live"; 
+		
 		public function MouseChange(stage:Stage)
 		{
 			stage.addEventListener(MouseEvent.MOUSE_MOVE,mouseMove);
 		}
 		
-		public function start():void{
+		public function start(mode:String = LIVE):void{
 			this._isRunning = true;
+			this.mode = mode;
+			
 		}
 		
+			
 		public function stop(reset:Boolean = true):void{
 			if(reset){
 				previousMouseX = -1;
@@ -42,8 +49,10 @@ package worldkit.core
 			
 			dispatchEvent(new MousePositionChangeEvent(diffX,diffY,MousePositionChangeEvent.MOUSE_CHANGE_EVENT));
 			
-			previousMouseX = DrawingArea.Instance.mouseX;
-			previousMouseY = DrawingArea.Instance.mouseY;
+			if(mode == LIVE){
+				previousMouseX = DrawingArea.Instance.mouseX;
+				previousMouseY = DrawingArea.Instance.mouseY;
+			}
 			
 		}
 		
