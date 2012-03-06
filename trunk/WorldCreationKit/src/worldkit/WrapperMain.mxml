@@ -12,18 +12,20 @@
 			import nape.util.ShapeDebug;
 			
 			import worldkit.core.DrawingArea;
-			import worldkit.core.DrawingController;
-			import worldkit.core.MouseInteractionController;
-			import worldkit.core.NapeController;
+			import worldkit.core.RunWorld;
 			import worldkit.data.BodyDO;
 			import worldkit.data.PolygonDO;
+			import worldkit.data.RectangleDO;
 			import worldkit.data.ShapeDO;
+			import worldkit.data.WorldDO;
+			import worldkit.gfx.GfxElement;
 			import worldkit.gfx.GraphicFactory;
+			import worldkit.gfx.PhysicsFactory;
 			
-			public var mainArea:UIComponent = new UIComponent;
-
-			private var drawingArea:DrawingArea;
+			public static var mainArea:UIComponent = new UIComponent;
 			public static  var mainDebug:ShapeDebug = new ShapeDebug(100,100);
+
+			private var runWorld2:RunWorld;
 			
 			protected function brcDrawingArea_creationCompleteHandler(event:Event):void
 			{
@@ -35,25 +37,46 @@
 			protected function createRectangle(event:MouseEvent):void
 			{
 				// TODO Auto-generated method stub
-				var sp:Sprite  = GraphicFactory.drawRectangle(0,0,100,100)[0] as Sprite;
-				DrawingArea.Instance.addChild(sp);
+			/* 	var sp:GfxElement  = GraphicFactory.drawRectangle(0,0,100,100)[0] as GfxElement;
+				sp.x = 100;
+				sp.y = 100;
+				DrawingArea2.Instance.addChild(sp); */
 				
-				/* var bodyDO:BodyDO = new BodyDO(100,100,BodyDO.DYNAMIC);
+				
+				
+				 var bodyDO:BodyDO = new BodyDO(100,100,BodyDO.STATIC);
 				
 				var shapes:Vector.<ShapeDO> = new Vector.<ShapeDO>();
-				shapes.push(new PolygonDO(50,50));
+				var rectangle:RectangleDO = new RectangleDO(PhysicsFactory.getRectanglePoints(0,0,100,100));
+				shapes.push(rectangle);
 				bodyDO.shapes = shapes;
 				
-				DrawingController.Instance.addPlygonBody(bodyDO); */
+				var sprite:GfxElement = PhysicsFactory.createGraphicFromBody(bodyDO);
+				DrawingArea.Instance.addToWorld(sprite);
 				//mainDebug
 				
 			}
 			
-			protected function play(event:MouseEvent):void
+			protected function run(event:MouseEvent):void
 			{
 				// TODO Auto-generated method stub
-				DrawingArea.Instance.run = !DrawingArea.Instance.run;
-				DrawingArea.Instance.makeEverythingClean();
+				//DrawingArea.Instance.run = !DrawingArea.Instance.run;
+			//	DrawingArea.Instance.makeEverythingClean();
+				runWorld();
+			}
+			
+			public function runWorld():void{
+				runWorld2 = new RunWorld(DrawingArea.Instance.world);
+				mainArea.addChild(runWorld2);
+				DrawingArea.Instance.visible = false;
+				//runWorld.initWorld(DrawingArea2.Instance.world);
+			}
+			
+			protected function stop(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				DrawingArea.Instance.visible = true;
+				mainArea.removeChild(runWorld2);
 			}
 			
 		]]>
@@ -63,7 +86,8 @@
 	</fx:Declarations>
 	<s:BorderContainer left="5" right="5" top="5" height="40">
 		<s:Button x="2" y="4" width="34" label="R" click="createRectangle(event)"/>
-		<s:Button x="1107" y="10" width="36" label="P" click="play(event)"/>
+		<s:Button x="1088" y="10" width="55" label="Run" click="run(event)"/>
+		<s:Button x="1155" y="10" width="55" label="Stop" click="stop(event)"/>
 		<worldkit:BodyConf x="100" y="0">
 		</worldkit:BodyConf>
 	</s:BorderContainer>

@@ -104,6 +104,7 @@ package
 			space.step(1/stage.frameRate,10,10);
 			phyDebug.draw(space);
 			phyDebug.flush();
+			trace(phyDebug.display.width)
 		}
 	}
 }

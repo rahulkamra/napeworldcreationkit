@@ -9,8 +9,6 @@
 			
 			import spark.events.IndexChangeEvent;
 			
-			import worldkit.core.DrawingArea;
-			import worldkit.core.MouseInteractionController;
 			import worldkit.core.event.InteractiveEvent;
 			import worldkit.core.event.WorldKitEvent;
 			import worldkit.data.BodyDO;
@@ -31,24 +29,23 @@
 			protected function group1_creationCompleteHandler(event:FlexEvent):void
 			{
 				// TODO Auto-generated method stub
-				DrawingArea.Instance.addEventListener(WorldKitEvent.INIT_COMPLETE,initcomplete);
+				//DrawingArea.Instance.addEventListener(WorldKitEvent.INIT_COMPLETE,initcomplete);
 			}
 			
 			protected function highlightEvent(event:InteractiveEvent):void
 			{
 				// TODO Auto-generated method stub
-				if(event.body){
+			/* 	if(event.body){
 					_data = DrawingArea.Instance.bodyKeyDict[event.body] as BodyDO;
 				}else{
 					_data = null;
-				}
+				} */
 				
 			}
 			
 			protected function initcomplete(event:Event):void
 			{
 				// TODO Auto-generated method stub
-				MouseInteractionController.Instance.addEventListener(InteractiveEvent.HIGHLIGHT_EVENT,highlightEvent);
 				
 			}
 			

@@ -2,12 +2,12 @@ package worldkit.data
 {
 	public class RectangleDO extends PolygonDO
 	{
-		public function RectangleDO(width:Number, height:Number)
+		public function RectangleDO(points:Array)
 		{
-			super(width, height);
+			super(points);
 		}
 		
-		public function get numberOfSides():int{
+		override public function get numberOfSides():int{
 			return 4;
 		}
 	}
